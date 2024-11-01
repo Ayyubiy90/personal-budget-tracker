@@ -1,5 +1,5 @@
 // Import the Transaction type from the budget types module
-import { Transaction } from '../types/budget';
+import { Transaction } from '../types/budgets';
 // Import the format function from the date-fns library for date formatting
 import { format } from 'date-fns';
 
