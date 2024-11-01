@@ -122,7 +122,7 @@ const Dashboard: React.FC = () => {
                       ? 'bg-red-500' // Alert color when spent exceeds the threshold
                       : 'bg-primary-500' // Normal color
                   }`}
-                  style={{ width: `${Math.min((budget.spent / budget.limit) * 100, 100)}%` }} {/* Progress bar width calculation */}
+                  style={{ width: `${Math.min((budget.spent / budget.limit) * 100, 100)}%` }}
                 />
               </div>
             </div>
