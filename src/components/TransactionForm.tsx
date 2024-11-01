@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { useBudget } from "../context/BudgetContext";
 
 // Importing the TransactionCategory type for type safety in the form data
-import { TransactionCategory } from "../types/budget";
+import { TransactionCategory } from "../types/budgets";
 
 // Defining the shape of the data that will be collected from the transaction form
 interface TransactionFormData {
