@@ -8,7 +8,7 @@ import { useBudget } from "../context/BudgetContext";
 import { formatAmount } from "../utils/currency";
 
 // Importing Transaction type for type safety
-import { Transaction } from "../types/budget";
+import { Transaction } from "../types/budgets";
 
 // Importing format function from date-fns for formatting dates
 import { format } from "date-fns";
@@ -29,7 +29,7 @@ const TransactionList: React.FC = () => {
 
   // Filtering transactions based on the search term and selected filter
   const filteredTransactions = transactions
-    .filter((transaction) => {
+    .filter((transaction: Transaction) => {
       // Check if the transaction description or category includes the search term (case insensitive)
       const matchesSearch =
         transaction.description
@@ -50,36 +50,28 @@ const TransactionList: React.FC = () => {
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 space-y-4 md:space-y-0">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
           Transactions
-        </h2>{" "}
-        {/* Title of the section */}
+        </h2>
+        {/* Search input for filtering transactions */}
         <div className="flex space-x-4 w-full md:w-auto">
-          {/* Search input for filtering transactions */}
           <div className="relative flex-1 md:flex-initial">
             <input
-              type="text" // Input type for text search
-              placeholder="Search transactions..." // Placeholder text
+              type="text"
+              placeholder="Search transactions..."
               className="w-full pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-              value={searchTerm} // Controlled input value
-              onChange={(e) => setSearchTerm(e.target.value)} // Updating search term on input change
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
-            {/* Search icon positioned inside the input field */}
             <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
           </div>
-
-          {/* Dropdown for filtering transactions by type */}
           <select
             className="px-4 py-2 border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-            value={filter} // Controlled select value
+            value={filter}
             onChange={(e) =>
               setFilter(e.target.value as "all" | "income" | "expense")
-            } // Updating filter on change
-          >
-            <option value="all">All</option>{" "}
-            {/* Option to show all transactions */}
-            <option value="income">Income</option>{" "}
-            {/* Option to show only income transactions */}
-            <option value="expense">Expenses</option>{" "}
-            {/* Option to show only expense transactions */}
+            }>
+            <option value="all">All</option>
+            <option value="income">Income</option>
+            <option value="expense">Expenses</option>
           </select>
         </div>
       </div>
@@ -89,71 +81,71 @@ const TransactionList: React.FC = () => {
         <table className="w-full">
           <thead>
             <tr className="text-left border-b dark:border-gray-700">
-              <th className="pb-3 text-gray-600 dark:text-gray-300">Date</th>{" "}
-              {/* Column for transaction date */}
-              <th className="pb-3 text-gray-600 dark:text-gray-300">
-                Type
-              </th>{" "}
-              {/* Column for transaction type */}
-              <th className="pb-3 text-gray-600 dark:text-gray-300">
+              <th className="pb-3 text-gray-600 dark:text-gray-300">Date</th>
+              <th className="pb-3 text-gray-600 dark:text-gray-300">Type</th>
+              <th className=" pb-3 text-gray-600 dark:text-gray-300">
                 Category
-              </th>{" "}
-              {/* Column for transaction category */}
+              </th>
               <th className="pb-3 text-gray-600 dark:text-gray-300">
-                Description
-              </th>{" "}
-              {/* Column for transaction description */}
+                Description 
+              </th>
               <th className="pb-3 text-gray-600 dark:text-gray-300 text-right">
                 Amount
-              </th>{" "}
-              {/* Column for transaction amount */}
+              </th>
             </tr>
           </thead>
           <tbody>
-            {filteredTransactions.map((transaction) => (
-              <tr
-                key={transaction.id}
-                className="border-b dark:border-gray-700">
-                <td className="py-4 text-gray-900 dark:text-gray-100">
-                  {/* Formatting transaction date using date-fns */}
-                  {format(new Date(transaction.date), "MMM d, yyyy")}
-                </td>
-                <td className="py-4">
-                  {/* Displaying transaction type with an icon */}
-                  {transaction.type === "income" ? (
-                    <span className="flex items-center text-green-500">
-                      <ArrowUpRight className="h-4 w-4 mr-1" />
-                      Income
-                    </span>
-                  ) : (
-                    <span className="flex items-center text-red-500">
-                      <ArrowDownRight className="h-4 w-4 mr-1" />
-                      Expense
-                    </span>
-                  )}
-                </td>
-                <td className="py-4 capitalize text-gray-900 dark:text-gray-100">
-                  {transaction.category}
-                </td>
-                <td className="py-4 text-gray-900 dark:text-gray-100">
-                  {transaction.description}
-                </td>
-                <td className="py-4 text-right">
-                  {/* Formatting transaction amount using the formatAmount utility function */}
-                  <span
-                    className={
-                      transaction.type === "income"
-                        ? "text-green-500"
-                        : "text-red-500"
-                    }>
-                    {formatAmount(
-                      transaction.amount || 0,
-                      transaction.currency
+            {filteredTransactions.length > 0 ? (
+              filteredTransactions.map((transaction) => (
+                <tr
+                  key={transaction.id}
+                  className="border-b dark:border-gray-700">
+                  <td className="py-4 text-gray-900 dark:text-gray-100">
+                    {format(new Date(transaction.date), "MMM d, yyyy")}
+                  </td>
+                  <td className="py-4">
+                    {transaction.type === "income" ? (
+                      <span className="flex items-center text-green-500">
+                        <ArrowUpRight className="h-4 w-4 mr-1" />
+                        Income
+                      </span>
+                    ) : (
+                      <span className="flex items-center text-red-500">
+                        <ArrowDownRight className="h-4 w-4 mr-1" />
+                        Expense
+                      </span>
                     )}
-                  </span>
+                  </td>
+                  <td className="py-4 capitalize text-gray-900 dark:text-gray-100">
+                    {transaction.category}
+                  </td>
+                  <td className="py-4 text-gray-900 dark:text-gray-100">
+                    {transaction.description}
+                  </td>
+                  <td className="py-4 text-right">
+                    <span
+                      className={
+                        transaction.type === "income"
+                          ? "text-green-500"
+                          : "text-red-500"
+                      }>
+                      {formatAmount(
+                        transaction.amount || 0,
+                        transaction.currency
+                      )}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan={5}
+                  className="py-4 text-center text-gray-600 dark:text-gray-300">
+                  No transactions found.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
