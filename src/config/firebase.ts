@@ -6,12 +6,12 @@ import { getFirestore } from 'firebase/firestore'; // Function to get Firestore 
 // Firebase configuration object containing the project's specific settings
 const firebaseConfig = {
   // Replace with your Firebase config values
-  apiKey: "YOUR_API_KEY", // API key for authenticating requests
-  authDomain: "YOUR_AUTH_DOMAIN", // Domain for Firebase Authentication
-  projectId: "YOUR_PROJECT_ID", // Unique identifier for the Firebase project
-  storageBucket: "YOUR_STORAGE_BUCKET", // Cloud Storage bucket for storing files
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID", // Unique sender ID for Firebase Cloud Messaging
-  appId: "YOUR_APP_ID" // Unique identifier for the Firebase app
+  apiKey: "AIzaSyDk1-R0tomUVuTqIJLGT00G9BHB8INj2fE", // API key for authenticating requests
+  authDomain: "personal-budget-tracker-b2a58.firebaseapp.com", // Domain for Firebase Authentication
+  projectId: "personal-budget-tracker-b2a58", // Unique identifier for the Firebase project
+  storageBucket: "personal-budget-tracker-b2a58.firebasestorage.app", // Cloud Storage bucket for storing files
+  messagingSenderId: "454968228018", // Unique sender ID for Firebase Cloud Messaging
+  appId: "1:454968228018:web:38bb2639e4f456218571ab" // Unique identifier for the Firebase app  
 };
 
 // Initializing the Firebase app with the provided configuration
